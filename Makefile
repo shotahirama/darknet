@@ -1,6 +1,6 @@
 GPU=0
 CUDNN=0
-OPENCV=0
+OPENCV=1
 DEBUG=0
 
 ARCH= -gencode arch=compute_20,code=[sm_20,sm_21] \
@@ -13,15 +13,15 @@ ARCH= -gencode arch=compute_20,code=[sm_20,sm_21] \
 # ARCH=  -gencode arch=compute_52,code=compute_52
 
 VPATH=./src/
-EXEC=darknet
+EXEC=libdarknet.so
 OBJDIR=./obj/
 
 CC=gcc
 NVCC=nvcc 
 OPTS=-Ofast
-LDFLAGS= -lm -pthread 
+LDFLAGS= -lm -pthread -shared
 COMMON= 
-CFLAGS=-Wall -Wfatal-errors 
+CFLAGS=-Wall -Wfatal-errors -fPIC
 
 ifeq ($(DEBUG), 1) 
 OPTS=-O0 -g
